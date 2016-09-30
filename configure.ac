@@ -83,7 +83,11 @@ then
 fi
 
 # find the numpy includes
-NUMPY_INCLUDE_DIR=`$PYTHON -c "import numpy; print(numpy.get_include())"`
+# NUMPY_INCLUDE_DIR=`$PYTHON -c "import numpy; print(numpy.get_include())"`
+# MDH - made static dir for where numpy 1.11.1 resides
+# this is what I get when I run PYTHON -c "import numpy; print(numpy.get_include())"
+NUMPY_INCLUDE_DIR=`/usr/local/lib/python2.7/site-packages/numpy/core/include`
+
 if test -z "${NUMPY_INCLUDE_DIR}"; then
   echo "Could not locate numpy include directory"
   exit 1
