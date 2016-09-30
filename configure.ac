@@ -86,12 +86,23 @@ fi
 # NUMPY_INCLUDE_DIR=`$PYTHON -c "import numpy; print(numpy.get_include())"`
 # MDH - made static dir for where numpy 1.11.1 resides
 # this is what I get when I run PYTHON -c "import numpy; print(numpy.get_include())"
-NUMPY_INCLUDE_DIR=`/usr/local/lib/python2.7/site-packages/numpy/core/include`
-
-if test -z "${NUMPY_INCLUDE_DIR}"; then
+# NUMPY_INCLUDE_DIR=`/usr/local/lib/python2.7/site-packages/numpy/core/include`
+# Attempt to make NUMPY_INCLUDE_DIR exposed
+## MDH ADDED --- start ---
+if test -z "${NUMPY_INCLUDE_DIR}"
+then
+  echo "Using numpy binary from PATH"
+  # USE_PYTHON=python
+else
   echo "Could not locate numpy include directory"
   exit 1
 fi
+# -- stop ---
+
+#if test -z "${NUMPY_INCLUDE_DIR}"; then
+#  echo "Could not locate numpy include directory"
+#  exit 1
+#fi
 PKG_CPPFLAGS="$PKG_CPPFLAGS -I$NUMPY_INCLUDE_DIR"
 
 # Find the .so library for python
